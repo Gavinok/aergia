@@ -37,10 +37,14 @@ endfunction
 function! s:ReplTag(append, insert)
   " append if this tag is the last set of chars on the line
   if getline('.')[col('.') - 1:] =~ '^' . s:pattern . '$'
-    execute "normal! " . '"_df' . s:closing[-1:]
+	normal! v
+	call search(s:closing, 'cWe')
+    execute "normal! " . '"_d'
     execute a:append
   else
-    execute "normal! " .  '"_df' . s:closing[-1:]
+	normal! v
+	call search(s:closing, 'cWe')
+    execute "normal! " .  '"_d'
     execute a:insert
   endif
 endfunction
